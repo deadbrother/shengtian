@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/common_header :: commonHeader('customerComment detail')"></head>
+<body>
+<div class="container">
+    <table class="table table-striped">
+        <tr th:each="commentContent : ${pageInfo.list}">
+            <td><img th:src="@{/data/getImage(id=${commentContent.content})}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    servlet:
+      content-type: text/html
+  mvc:
+    static-path-pattern: /**
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/localtest?useUnicode=true&characterEncoding=utf8mb4&autoReconnect=true&useSSL=false
+    username: root
+    password: root
+    maxActive: 5
+    initialSize: 2
+    maxWait: 60000
+    minIdle: 2
+    timeBetweenEvictionRunsMillis: 60000
+
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
