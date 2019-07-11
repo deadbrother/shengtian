@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-public class ServiceType {
+public class ReviewInfoType {
     private Integer id;
     private String name;
+    private Integer questionTypeId;
 }

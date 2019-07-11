@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-public class ServiceType {
+public class NewsClassification {
     private Integer id;
     private String name;
 }

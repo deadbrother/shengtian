@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-public class ServiceType {
+public class PlatForm {
     private Integer id;
     private String name;
+    private Integer mediaTypeId;
 }

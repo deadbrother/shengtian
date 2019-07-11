@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/common_header :: commonHeader('ad-intro-edit')"></head>
+<body style="margin: auto;width: 1200px">
+<script type="text/javascript">
+    $(function () {
+        var E = window.wangEditor;
+        var editor = new E('#edit_content');
+        editor.customConfig.uploadImgShowBase64 = true;
+        editor.customConfig.showLinkImg= false;
+        editor.customConfig.uploadImgServer = '/data/save';  // 上传图片到服务器
+        // 3M
+        editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;
+        // 限制一次最多上传 5 张图片
+        editor.customConfig.uploadImgMaxLength = 1;
+        // 自定义文件名
+        editor.customConfig.uploadFileName = 'file';
+        // 将 timeout 时间改为 3s
+        editor.customConfig.uploadImgTimeout = 5000;
+
+        editor.customConfig.uploadImgHooks = {
+            before: function (xhr, editor, files) {
+                // 图片上传之前触发
+                // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
+
+                // 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
+                // return {
+                //     prevent: true,
+                //     msg: '放弃上传'
+                // }
+                // alert("前奏");
+            },
+            success: function (xhr, editor, result) {
+                // 图片上传并返回结果，图片插入成功之后触发
+                // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+                var url = result.data;
+                console.log(url);
+                // alert(JSON.stringify(url));
+                // editor.txt.append(url);
+                // alert("成功");
+            },
+            fail: function (xhr, editor, result) {
+                // 图片上传并返回结果，但图片插入错误时触发
+                // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+                alert("失败");
+            },
+            error: function (xhr, editor) {
+                // 图片上传出错时触发
+                // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+                // alert("错误");
+            },
+            // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+            // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+            customInsert: function (insertImg, result, editor) {
+                // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+                // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+                // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+                var url = result.data;
+                insertImg(url);
+                // result 必须是一个 JSON 格式字符串！！！否则报错
+            }
+        }
+        editor.customConfig.menus = [
+            'head',  // 标题
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'fontName',  // 字体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'strikeThrough',  // 删除线
+            'foreColor',  // 文字颜色
+            'backColor',  // 背景颜色
+            'link',  // 插入链接
+            'list',  // 列表
+            'justify',  // 对齐方式
+            'quote',  // 引用
+            'emoticon',  // 表情
+            'image',  // 插入图片
+            'table',  // 表格
+            'video',  // 插入视频
+            'code',  // 插入代码
+            'undo',  // 撤销
+            'redo'  // 重复
+        ];
+        editor.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+            $("#content").val(html);
+        }
+        editor.create();
+
+
+
+
+        //editor.txt.html($("#edit_content").val());
+    });
+
+    //var content = editor.txt.html();
+</script>
+<form enctype="multipart/form-data" method="post" action="/article/save">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> </button>
+        <h4 class="modal-title" id="myModalLabel">ad-intro edit</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="input-group">
+            <label class="col-lg-4">edit-name:</label>
+            <input class="col-lg-8" id="editor"  name="editor"/>
+        </div>
+        <div class="input-group">
+            <label class="col-lg-4">source-from:</label>
+            <input class="col-lg-8"  id="sourceFrom" name="sourceFrom"/>
+        </div>
+        <div class="input-group">
+            <label class="col-lg-4">content:</label>
+            <span class="col-lg-11" id="edit_content" ></span>
+            <textarea id="content" name="content" hidden ></textarea>
+            <!--<input class="col-lg-8" id="edit_content" hidden th:value="${data.content==null?'':data.content}" name="content"/>-->
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        <input type="submit" class="btn btn-primary" id="edit_save" value="submit">提交</input>
+    </div>
+</form>
+
+</body>
+</html>

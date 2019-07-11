@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-public class ServiceType {
+public class IndustryCategory {
     private Integer id;
     private String name;
 }

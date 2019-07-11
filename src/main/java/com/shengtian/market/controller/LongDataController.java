@@ -1,15 +1,11 @@
 package com.shengtian.market.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.shengtian.market.entity.Brand;
 import com.shengtian.market.entity.LongData;
-import com.shengtian.market.service.BrandService;
 import com.shengtian.market.service.LongDataService;
 import com.shengtian.market.vo.RestResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
