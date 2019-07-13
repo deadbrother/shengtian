@@ -25,6 +25,7 @@ CREATE TABLE `article`  (
   `news_classification_id` int(11) NULL DEFAULT NULL COMMENT '关联新闻类型id',
   `industry_category_id` int(11) NULL DEFAULT NULL COMMENT '关联产业类型id',
   `ad_year` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '自定义年份',
+  `status` int(11) NULL DEFAULT NULL COMMENT '状态:0正常1删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
