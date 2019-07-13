@@ -99,6 +99,16 @@ public class ArticleController {
         return "article/detail";
     }
 
+    @ResponseBody
+    @GetMapping(value="/detailData/{type}/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public RestResult getService(@PathVariable("type")Integer type, @PathVariable("id")Integer id){
+        RestResult result = new RestResult();
+        Article data = articleService.getDetail(type,id);
+        result.setData(data);
+        result.success();
+        return result;
+    }
+
 
     @GetMapping(value="/list",produces = MediaType.APPLICATION_JSON_VALUE)
     public String list(Model model,@RequestParam("pageNum")Integer pageNum,@RequestParam("pageSize")Integer pageSize,
