@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/common_header :: commonHeader('manageList')">
+
+</head>
+<body>
+<script type="text/javascript">
+    function deleteArticle(type,id){
+        $.ajax({
+            url : "delete?type="+type+"&id="+id,
+            type : "POST",
+
+            success : function(data) {
+                if(data.status == 200) {
+                    alert("success");
+                }
+            },
+            error : function(){
+            }
+        });
+    }
+
+</script>
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <td>cover</td>
+            <td>
+                headline and description
+            </td>
+            <td>
+                operate
+            </td>
+        </tr>
+        <tr th:each="data : ${pageInfo.list}">
+            <td><img th:src="@{/data/getImage(id=${data.cover})}"></td>
+            <td>
+                <td th:text="${data.headline}"></td>
+                <td th:text="${data.description}"></td>
+            </td>
+            <!--<td>
+                <a th:href="@{'delete?type='+${data.type}+'&id=' +${data.id}}">删除</a>
+            </td>-->
+            <td>
+                <a th:onclick="'javascript:deleteArticle('+${data.type} + ','+${data.id}+')'">
+                    删除
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <nav>
+        <ul class="pagination">
+            <li>
+                <a th:if="${not isFirstPage}" th:href="@{${'list'}(pageNum=${pageNum-1},pageSize=${pageSize})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                <a th:if="${isFirstPage}" href="javascript:void(0);" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <li th:each="pageNo : ${#numbers.sequence(1, totalPages)}">
+                <a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                    <span th:text="${pageNo}"></span>
+                </a>
+
+                <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'list'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                    <span th:text="${pageNo}"></span>
+                </a>
+            </li>
+
+            <li>
+                <a th:if="${not isLastPage}" th:href="@{${'list'}(pageNum=${pageNum+1},pageSize=${pageSize})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                <a th:if="${isLastPage}" href="javascript:void(0);" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

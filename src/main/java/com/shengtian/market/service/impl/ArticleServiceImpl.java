@@ -7,6 +7,7 @@ import com.shengtian.market.entity.Article;
 import com.shengtian.market.service.ArticleService;
 import com.shengtian.market.service.LongDataService;
 import com.shengtian.market.vo.ArticlePageMap;
+import com.shengtian.market.vo.ArticleStatusEnum;
 import com.shengtian.market.vo.ArticleVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class ArticleServiceImpl implements ArticleService {
         PageHelper.startPage(pageNum,pageSize);
         Example example = new Example(Article.class);
         Example.Criteria criteria = example.createCriteria();
-
+        criteria.andEqualTo(Article.STATUS, ArticleStatusEnum.NORMAL.getValue());
         if(!StringUtils.isEmpty(query.getHeadline())){
             criteria.andLike(Article.HEADLINE,"%" + query.getHeadline() + "%");
         }
@@ -90,6 +91,7 @@ public class ArticleServiceImpl implements ArticleService {
                 BeanUtils.copyProperties(article,articleInfo);
                 articleInfo.setCover(cover);
                 articleInfo.setCreateTime(new Date());
+                articleInfo.setStatus(ArticleStatusEnum.NORMAL.getValue());
                 articleMapper.insertSelective(articleInfo);
             }
         }
@@ -107,5 +109,11 @@ public class ArticleServiceImpl implements ArticleService {
         result = articleMapper.selectOne(example);
 
         return result;
+    }
+
+    @Override
+    public void delete(Article query) {
+        query.setStatus(ArticleStatusEnum.DELETE.getValue());
+        articleMapper.updateByPrimaryKeySelective(query);
     }
 }

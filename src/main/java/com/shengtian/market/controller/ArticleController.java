@@ -149,6 +149,40 @@ public class ArticleController {
         return "article/"+ ArticlePageMap.getNameByValue(type) +"-list";
     }
 
+    @GetMapping(value="/manageList",produces = MediaType.APPLICATION_JSON_VALUE)
+    public String manageList(Model model,@RequestParam("pageNum")Integer pageNum,@RequestParam("pageSize")Integer pageSize,
+                       @RequestParam(value = "type",required = false)Integer type){
+        Article query = new Article();
+        query.setType(type);
+        PageInfo pageInfo = articleService.getList(pageNum,pageSize,query);
+        model.addAttribute("pageInfo",pageInfo);
+        //获得当前页
+        model.addAttribute("pageNum", pageInfo.getPageNum());
+        //获得一页显示的条数
+        model.addAttribute("pageSize", pageInfo.getPageSize());
+        //是否是第一页
+        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
+        //获得总页数
+        model.addAttribute("totalPages", pageInfo.getPages());
+        //是否是最后一页
+        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+
+        return "article/managelist";
+    }
+
+    @ResponseBody
+    @PostMapping(value="/delete",produces = MediaType.APPLICATION_JSON_VALUE)
+    public RestResult delete(@RequestParam Integer type,@RequestParam Integer id){
+        RestResult result = new RestResult();
+        Article query = new Article();
+        query.setType(type);
+        query.setId(id);
+        articleService.delete(query);
+        result.success();
+        return result;
+
+    }
+
     @GetMapping(value="/search",produces = MediaType.APPLICATION_JSON_VALUE)
     public String list(Model model,@RequestParam("pageNum")Integer pageNum,@RequestParam("pageSize")Integer pageSize,
                        @RequestParam("headline") String headline

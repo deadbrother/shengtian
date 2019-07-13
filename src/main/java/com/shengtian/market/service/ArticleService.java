@@ -10,4 +10,6 @@ public interface ArticleService {
     void save(ArticleVo article);
 
     Article getDetail(Integer type, Integer id);
+
+    void delete(Article query);
 }

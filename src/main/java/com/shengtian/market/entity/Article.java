@@ -34,6 +34,7 @@ public class Article {
     private Integer industryCategoryId;
     private Integer newsClassificationId;
     private Integer type;
+    private Integer status;
 
 
     public Article() {
@@ -76,7 +77,7 @@ public class Article {
     public static final String INDUSTRYCATEGORYID = "industryCategoryId";
     public static final String NEWSCLASSFICATIONID = "newsClassficationId";
     public static final String TYPE = "type";
-
+    public static final String STATUS = "status";
 
 
 
