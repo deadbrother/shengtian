@@ -28,6 +28,17 @@ spring:
 
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+cors:
+  configs:
+  - path: /**
+    allowCredentials: false
+    allowedOrigins:
+    - '*'
+    allowedMethods:
+    - POST
+    - GET
+    - HEAD
+    - OPTIONS
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
