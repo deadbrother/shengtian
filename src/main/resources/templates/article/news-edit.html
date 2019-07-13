@@ -115,10 +115,11 @@
 <form enctype="multipart/form-data" method="post" action="/article/save">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> </button>
-        <h4 class="modal-title" id="myModalLabel">success case add</h4>
+        <h4 class="modal-title" id="myModalLabel">最新资讯</h4>
     </div>
 
     <div class="modal-body">
+        <input hidden name="type" th:value="${type}" />
         <div class="input-group">
             <label class="col-lg-4">edit-name:</label>
             <input class="col-lg-8" id="editor"  name="editor"/>
@@ -141,8 +142,8 @@
             <input class="col-lg-8" id="description"  name="description"/>
         </div>
         <div class="input-group">
-            <label class="col-lg-4">news-classification:</label>
-            <select class="selectpicker" id="newsClassificationId"   name="newsClassificationId">
+            <label class="col-lg-8">news-classification:</label>
+            <select class="col-lg-8" id="newsClassificationId"   name="newsClassificationId">
             </select>
         </div>
 

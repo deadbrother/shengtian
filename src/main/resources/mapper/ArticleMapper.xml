@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shengtian.market.dao.ArticleMapper">
+  <select id="customSelectAllAdYear" resultType="java.lang.String">
+    select ad_year as year from article
+    where ad_year is not null
+    group by ad_year
+
+  </select>
+</mapper>

@@ -2,23 +2,23 @@ package com.shengtian.market.vo;
 
 public class RestResult {
     private String msg;
-    private Integer code;
+    private Integer status;
     private Object data;
 
     public RestResult() {
     }
 
-    public RestResult(String msg, Integer code) {
+    public RestResult(String msg, Integer status) {
         this.msg = msg;
-        this.code = code;
+        this.status = status;
     }
 
     public void success(){
-        this.code = StatusCode.SUCCESS;
+        this.status = StatusCode.SUCCESS;
     }
 
     public void unknownError(String msg){
-        this.code = StatusCode.FAILURE;
+        this.status = StatusCode.FAILURE;
         this.msg = msg;
     }
 
@@ -30,12 +30,12 @@ public class RestResult {
         this.msg = msg;
     }
 
-    public Integer getCode() {
-        return code;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Object getData() {

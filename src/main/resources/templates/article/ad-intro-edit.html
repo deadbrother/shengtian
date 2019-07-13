@@ -99,22 +99,23 @@
 <form enctype="multipart/form-data" method="post" action="/article/save">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> </button>
-        <h4 class="modal-title" id="myModalLabel">ad-intro edit</h4>
+        <h4 class="modal-title" id="myModalLabel">广告投放方案定制</h4>
     </div>
 
     <div class="modal-body">
+        <input hidden name="type" th:value="${type}" />
         <div class="input-group">
             <label class="col-lg-4">edit-name:</label>
-            <input class="col-lg-8" id="editor"  name="editor"/>
+            <input class="col-lg-8" id="editor"  name="editor" th:value="${data.editor==null?'':data.editor}"/>
         </div>
         <div class="input-group">
             <label class="col-lg-4">source-from:</label>
-            <input class="col-lg-8"  id="sourceFrom" name="sourceFrom"/>
+            <input class="col-lg-8"  id="sourceFrom" name="sourceFrom" th:value="${data.sourceFrom==null?'':data.sourceFrom}"/>
         </div>
         <div class="input-group">
             <label class="col-lg-4">content:</label>
-            <span class="col-lg-11" id="edit_content" ></span>
-            <textarea id="content" name="content" hidden ></textarea>
+            <span class="col-lg-11" id="edit_content" th:utext="${data.content==null?'':data.content}"></span>
+            <textarea id="content" name="content" hidden th:text="${data.content==null?'':data.content}"></textarea>
             <!--<input class="col-lg-8" id="edit_content" hidden th:value="${data.content==null?'':data.content}" name="content"/>-->
         </div>
 

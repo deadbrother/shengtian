@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,7 +32,7 @@ public class ArticleServiceImpl implements ArticleService {
         Example.Criteria criteria = example.createCriteria();
 
         if(!StringUtils.isEmpty(query.getHeadline())){
-            criteria.andLike(Article.HEADLINE,query.getHeadline());
+            criteria.andLike(Article.HEADLINE,"%" + query.getHeadline() + "%");
         }
         if(query.getServiceTypeId() != null){
             criteria.andEqualTo(Article.SERVICETYPEID,query.getServiceTypeId());
@@ -45,8 +46,8 @@ public class ArticleServiceImpl implements ArticleService {
         if(query.getMediaTypeId() != null){
             criteria.andEqualTo(Article.MEDIATYPEID,query.getMediaTypeId());
         }
-        if(query.getNewsClassficationId() != null){
-            criteria.andEqualTo(Article.NEWSCLASSFICATIONID,query.getNewsClassficationId());
+        if(query.getNewsClassificationId() != null){
+            criteria.andEqualTo(Article.NEWSCLASSFICATIONID,query.getNewsClassificationId());
         }
         if(query.getPlatFormId() != null){
             criteria.andEqualTo(Article.PLATFORMID,query.getPlatFormId());
@@ -63,7 +64,7 @@ public class ArticleServiceImpl implements ArticleService {
         if(query.getSourceTypeId() != null){
             criteria.andEqualTo(Article.SOURCETYPEID,query.getSourceTypeId());
         }
-        List<Article> data = articleMapper.selectByExample(criteria);
+        List<Article> data = articleMapper.selectByExample(example);
         return new PageInfo(data);
     }
 
@@ -80,6 +81,7 @@ public class ArticleServiceImpl implements ArticleService {
                     articleInfo.setId(old.getId());
                     articleMapper.updateByPrimaryKeySelective(articleInfo);
                 }else{
+                    article.setCreateTime(new Date());
                     articleMapper.insertSelective(articleInfo);
                 }
             }else{
@@ -87,6 +89,7 @@ public class ArticleServiceImpl implements ArticleService {
                 Article articleInfo = new Article();
                 BeanUtils.copyProperties(article,articleInfo);
                 articleInfo.setCover(cover);
+                articleInfo.setCreateTime(new Date());
                 articleMapper.insertSelective(articleInfo);
             }
         }

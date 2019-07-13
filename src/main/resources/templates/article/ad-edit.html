@@ -14,7 +14,7 @@
                     for (var i in data.data) {
                         var temp = data.data[i];
                         $("#platFormId").append("<option value='"+temp.id+"'>"+temp.name+"</option>");
-                        $('#platFormId').selectpicker('refresh');
+                        //$('#platFormId').selectpicker('refresh');
                     }
                 }
             },
@@ -31,10 +31,15 @@
             type : "GET",
             success : function(data) {
                 if(data.status == 200) {
+                    var opt = "";
                     for (var i in data.data) {
                         var temp = data.data[i];
-                        $("#mediaTypeId").append("<option value='"+temp.id+"'>"+temp.name+"</option>");
+                        opt += "<option value='"+temp.id+"'>"+temp.name+"</option>";
+
                     }
+                    $("#mediaTypeId").append(opt);
+                    //$("#mediaTypeId").selectpicker('refresh');
+                    //$("#mediaTypeId").selectpicker('render');
                 }
             },
             error : function(){
@@ -47,10 +52,17 @@
             type : "GET",
             success : function(data) {
                 if(data.status == 200) {
+                    var opt = "";
                     for (var i in data.data) {
                         var temp = data.data[i];
-                        $("#sourceTypeId").append("<option value='"+temp.id+"'>"+temp.name+"</option>");
+
+                        opt += "<option value='"+temp.id+"'>"+temp.name+"</option>";
+
+                        //$("#sourceTypeId").selectpicker("refresh");
                     }
+                    $("#sourceTypeId").append(opt);
+                    //$("#sourceTypeId").selectpicker('refresh');
+                    //$("#sourceTypeId").selectpicker('reder');
                 }
             },
             error : function(){
@@ -154,10 +166,11 @@
 <form enctype="multipart/form-data" method="post" action="/article/save">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> </button>
-        <h4 class="modal-title" id="myModalLabel">success case add</h4>
+        <h4 class="modal-title" id="myModalLabel">广告价格自助查询</h4>
     </div>
 
     <div class="modal-body">
+        <input hidden name="type" th:value="${type}" />
         <div class="input-group">
             <label class="col-lg-4">edit-name:</label>
             <input class="col-lg-8" id="editor"  name="editor"/>
@@ -179,28 +192,28 @@
             <label class="col-lg-4">description:</label>
             <input class="col-lg-8" id="description"  name="description"/>
         </div>
+
         <div class="input-group">
-            <label class="col-lg-4">media-type:</label>
-            <select class="selectpicker" id="mediaTypeId" onchange="selectPlatform()"  name="mediaTypeId">
-            </select>
-        </div>
-        <div class="input-group">
-            <label class="col-lg-4">plat-form:</label>
-            <select class="" id="platFormId"  name="platFormId">
+            <label class="col-lg-8">media-type:</label>
+            <select  id="mediaTypeId" onchange="selectPlatform()"  name="mediaTypeId">
             </select>
         </div>
 
+        <div class="input-group">
+            <label class="col-lg-8">plat-form:</label>
+            <select class="col-lg-8" id="platFormId"  name="platFormId">
+            </select>
+        </div>
 
         <div class="input-group">
-            <label class="col-lg-4">source-type:</label>
-            <select class="" id="sourceTypeId"  name="sourceTypeId">
+            <label class="col-lg-8">source-type:</label>
+            <select id="sourceTypeId"  name="sourceTypeId">
             </select>
         </div>
 
         <div class="input-group">
             <label class="col-lg-4">year:</label>
-            <select class="" id="adYear"  name="adYear">
-            </select>
+            <input class="col-lg-8" id="adYear"  name="adYear">
         </div>
 
         <div class="input-group">

@@ -130,10 +130,11 @@
 <form enctype="multipart/form-data" method="post" action="/article/save">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> </button>
-        <h4 class="modal-title" id="myModalLabel">success case add</h4>
+        <h4 class="modal-title" id="myModalLabel">客户案例</h4>
     </div>
 
     <div class="modal-body">
+        <input hidden name="type" th:value="${type}" />
         <div class="input-group">
             <label class="col-lg-4">edit-name:</label>
             <input class="col-lg-8" id="editor"  name="editor"/>
@@ -156,13 +157,13 @@
             <input class="col-lg-8" id="description"  name="description"/>
         </div>
         <div class="input-group">
-            <label class="col-lg-4">industry-category:</label>
-            <select class="selectpicker" id="industryCategoryId"   name="industryCategoryId">
+            <label class="col-lg-8">industry-category:</label>
+            <select class="col-lg-8" id="industryCategoryId"   name="industryCategoryId">
             </select>
         </div>
         <div class="input-group">
-            <label class="col-lg-4">service-type:</label>
-            <select class="selectpicker" id="serviceTypeId"   name="serviceTypeId">
+            <label class="col-lg-8">service-type:</label>
+            <select class="col-lg-8" id="serviceTypeId"   name="serviceTypeId">
             </select>
         </div>
 

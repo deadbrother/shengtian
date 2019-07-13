@@ -36,6 +36,9 @@ public class CodeController {
     @Autowired
     private SourceTypeMapper sourceTypeMapper;
 
+    @Autowired
+    private ArticleMapper articleMapper;
+
     @GetMapping(value="/industryCategory",produces = MediaType.APPLICATION_JSON_VALUE)
     public RestResult getIndustryCategory(){
         RestResult result = new RestResult();
@@ -115,6 +118,14 @@ public class CodeController {
     public RestResult getSourceType(){
         RestResult result = new RestResult();
         result.setData(sourceTypeMapper.selectAll());
+        result.success();
+        return result;
+    }
+
+    @GetMapping(value="/adYear",produces = MediaType.APPLICATION_JSON_VALUE)
+    public RestResult getAdYear(){
+        RestResult result = new RestResult();
+        result.setData(articleMapper.customSelectAllAdYear());
         result.success();
         return result;
     }

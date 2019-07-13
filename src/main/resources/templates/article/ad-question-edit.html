@@ -6,7 +6,7 @@
     function selectReviewInfoType(){
         var questionTypeId = $("#questionTypeId").val();
         $.ajax({
-            url: "/code/reviceInfoType?questionTypeId=" + questionTypeId,
+            url: "/code/reviewInfoType?questionTypeId=" + questionTypeId,
             type: "GET",
             success: function (data) {
                 if (data.status == 200) {
@@ -16,7 +16,7 @@
                         for (var i in data.data) {
                             var temp = data.data[i];
                             $("#reviewInfoTypeId").append("<option value='" + temp.id + "'>" + temp.name + "</option>");
-                            $("#reviewInfoTypeId").selectpicker('refresh');
+                            //$("#reviewInfoTypeId").selectpicker('refresh');
                         }
                     }else{
                         $("#reviewInfo").hide();
@@ -142,10 +142,11 @@
 <form enctype="multipart/form-data" method="post" action="/article/save">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> </button>
-        <h4 class="modal-title" id="myModalLabel">success case add</h4>
+        <h4 class="modal-title" id="myModalLabel">常见问题解答</h4>
     </div>
 
     <div class="modal-body">
+        <input hidden name="type" th:value="${type}" />
         <div class="input-group">
             <label class="col-lg-4">edit-name:</label>
             <input class="col-lg-8" id="editor"  name="editor"/>
@@ -168,13 +169,13 @@
             <input class="col-lg-8" id="description"  name="description"/>
         </div>
         <div class="input-group">
-            <label class="col-lg-4">question-type:</label>
-            <select class="selectpicker" id="questionTypeId" onchange="selectReviewInfoType()"  name="questionTypeId">
+            <label class="col-lg-8">question-type:</label>
+            <select class="col-lg-8" id="questionTypeId" onchange="selectReviewInfoType()"  name="questionTypeId">
             </select>
         </div>
         <div class="input-group" id="reviewInfo" hidden>
-            <label class="col-lg-4">review-info-type:</label>
-            <select class="" id="reviewInfoTypeId"  name="reviewInfoTypeId">
+            <label class="col-lg-8">review-info-type:</label>
+            <select class="col-lg-8" id="reviewInfoTypeId"  name="reviewInfoTypeId">
             </select>
         </div>
 

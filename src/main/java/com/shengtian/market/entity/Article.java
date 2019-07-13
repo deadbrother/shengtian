@@ -32,8 +32,30 @@ public class Article {
     private Integer questionTypeId;
     private Integer reviewInfoTypeId;
     private Integer industryCategoryId;
-    private Integer newsClassficationId;
+    private Integer newsClassificationId;
     private Integer type;
+
+
+    public Article() {
+    }
+
+    public Article(String content, String editor, String sourceFrom, Integer platFormId, Integer mediaTypeId, Integer sourceTypeId, String adYear, String headline, String description, Integer serviceTypeId, Integer questionTypeId, Integer reviewInfoTypeId, Integer industryCategoryId, Integer newsClassificationId, Integer type) {
+        this.content = content;
+        this.editor = editor;
+        this.sourceFrom = sourceFrom;
+        this.platFormId = platFormId;
+        this.mediaTypeId = mediaTypeId;
+        this.sourceTypeId = sourceTypeId;
+        this.adYear = adYear;
+        this.headline = headline;
+        this.description = description;
+        this.serviceTypeId = serviceTypeId;
+        this.questionTypeId = questionTypeId;
+        this.reviewInfoTypeId = reviewInfoTypeId;
+        this.industryCategoryId = industryCategoryId;
+        this.newsClassificationId = newsClassificationId;
+        this.type = type;
+    }
 
     public static final String ID = "id";
     public static final String CONTENT = "content";

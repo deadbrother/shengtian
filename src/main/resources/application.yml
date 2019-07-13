@@ -11,7 +11,7 @@ spring:
     static-path-pattern: /**
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/localtest?useUnicode=true&characterEncoding=utf8mb4&autoReconnect=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/localetst2?useUnicode=true&characterEncoding=utf8mb4&autoReconnect=true&useSSL=false
     username: root
     password: root
     maxActive: 5
@@ -34,3 +34,4 @@ mybatis:
     map-underscore-to-camel-case: true
     default-fetch-size: 100
     default-statement-timeout: 30
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
